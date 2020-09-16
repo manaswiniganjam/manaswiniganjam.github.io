@@ -1,0 +1,63 @@
+---
+layout: layout
+
+---
+    <!-- Google Analytics -->
+    {% include analytics.html %}
+	
+  <div id="wrap">
+ 
+ <section id="about">
+
+	<div class="container">
+	  <div class="avatar">
+	   <a href="{{ site.baseurl }}"> 
+	   <img class="img-circle" src="{{ site.baseurl }}static/img/{{ site.avatar }}" alt="Responsive image" width="130" height="130">
+	  </a>
+	  </div>
+	  <h1><a href="{{ site.baseurl }}"> <strong> {{ site.author }} <strong></a></h1>
+	  <h4>{{site.tagline}}</h4>
+	</div>
+</section>  
+{% include header.html %}
+
+<section id="home">
+      <aside class="widget" >
+        <div class="widget blog-widget" >	  
+          <div class="test test-default">
+    <div class="test-body">
+	<h3> LATEST POSTS</h3>
+		{% for post in site.posts limit:2 %}
+			<div class="blog-post">
+		<h4>
+		  <a href="{{site.baseurl}}{{post.url}}">{{ post.title }}</a>
+		</h4>
+	</div>
+	<div class="content">
+		<h5>
+		{{post.content | truncatewords: 30}}
+		</h5>
+</div>
+<div class="index-blog-title">
+		<h6>
+		{{ post.date | date: "%B %e, %Y" }}
+			&nbsp;&nbsp;-&nbsp;
+		{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " minute read" }}{% endunless %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		</h6>
+		<hr>
+	</div>
+	
+{% endfor %}
+</div>	                
+		  </div>
+        </div>
+      </aside>
+	  
+	 </section>
+  {% include Social.html %}
+  </div>
+  
+ 
+ 

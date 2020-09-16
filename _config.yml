@@ -1,0 +1,32 @@
+# top level stuff you probably don't need to touch
+highlighter: rouge
+markdown: kramdown
+rdiscount:
+  extensions: [smart]
+permalink: /:title.html
+paginate: 5
+plugins: [jekyll-paginate]
+port: 3000
+safe: true
+
+
+# edit here to achieve your personal greatness
+url: http://manaswinig.github.io/
+baseurl: /home/
+title: Manaswini Ganjam
+author: Manaswini Ganjam
+tagline: An early stage researcher in Geo-informatics
+description: Personal blog and resume
+avatar: profile3.png
+email: ganjamma@msu.edu
+github: manaswiniganjam # username
+twitter: ManaswiniGanjam
+linkedin: manaswiniganjam
+stackoverflow: users/7074531/manaswini-ganjam   #e.g: users/2735833/proton1h1
+#Comment out if you don't want disqus
+disqus: username
+google_analytics: UA-69391421-1
+
+
+# needed for travis-ci build
+exclude: [vendor]
