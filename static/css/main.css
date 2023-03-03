@@ -67,6 +67,7 @@ body {
 .container h1 a {
 	color: #302821;
 	padding-top: 2px;
+	font-size: 26px;
 }
 .container h1 a:hover {
 	color: #302821;
