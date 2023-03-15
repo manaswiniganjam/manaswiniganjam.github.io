@@ -31,17 +31,21 @@ title: resume
 	<div class="frame">
 	 <h2>RESUME</h2>
 	 </div>
-    <div id="adobe-dc-view" style="position:relative; top: 0; left: 0; background-color:#e6e0db"></div>
+<div id="contentframe" style="position:relative; top: 0; left: 0; background-color:#e6e0db">
+    <div id="adobe-dc-view"></div>
 <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-<script type="text/javascript">
-	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
-		var adobeDCView = new AdobeDC.View({clientId: "01825c4ddb0c444ca2499c6574731cb7", divId: "adobe-dc-view"});
-		adobeDCView.previewFile({
-			content:{promise: "<https://manaswiniganjam.github.io/pdf/mg_resume_general.pdf"},
-			metaData:{fileName: "resume"}
-		}, {embedMode: "IN_LINE"});
-	});
-</script>
+ <script type="text/javascript">
+    document.addEventListener("adobe_dc_view_sdk.ready", function()
+    {
+        var adobeDCView = new AdobeDC.View({clientId: "01825c4ddb0c444ca2499c6574731cb7", divId: "adobe-dc-view"});
+        adobeDCView.previewFile(
+       {
+          content:   {location: {url: "https://manaswiniganjam.github.io/pdf/mg_resume_general.pdf"}},
+          metaData: {fileName: "mg_resume_general.pdf"}
+       });
+    });
+ </script>	
+	</div>
 	</div>
 	</div>
 	</div>
