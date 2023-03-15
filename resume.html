@@ -35,6 +35,12 @@ title: resume
     <div id="adobe-dc-view"></div>
 <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
  <script type="text/javascript">
+// Store the UI options in a constant
+const previewConfig = {
+   embedMode: "IN_LINE",
+   showDownloadPDF: false,
+   showZoomControl: false
+}
     document.addEventListener("adobe_dc_view_sdk.ready", function()
     {
         var adobeDCView = new AdobeDC.View({clientId: "01825c4ddb0c444ca2499c6574731cb7", divId: "adobe-dc-view"});
@@ -42,7 +48,7 @@ title: resume
        {
           content:   {location: {url: "https://manaswiniganjam.github.io/pdf/mg_resume_general.pdf"}},
           metaData: {fileName: "mg_resume_general.pdf"}
-       });
+       }, previewConfig);
     });
  </script>	
 	</div>
