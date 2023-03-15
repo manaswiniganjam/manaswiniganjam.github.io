@@ -305,6 +305,6 @@ line-height: 1.6;
 .resume_pdf {
 width: 800px; 
 background-color:#e6e0db;
-position:absolute;
-left: 50%;
+position:relative;
+left: 160px;
 }
