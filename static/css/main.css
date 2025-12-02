@@ -276,6 +276,14 @@ body {
   color: #302821;
 }
 
+/* Google Scholar icon styling */
+.ai-google-scholar-square {
+  border-radius: 2px;      /* soften edges to match other icons */
+  padding: 2px;            /* fixes visual centering */
+  font-size: 1.05em;       /* keeps size consistent with FA icons */
+  vertical-align: middle;  /* ensures icons line up properly */
+}
+
 /*background color of the blog styling*/
 
 body {
