@@ -329,9 +329,10 @@ line-height: 1.6;
 
 @media (max-width: 900px){
   .test{
-    border-left-width: 15px;
-    border-right-width: 15px;
-  }
+  background-color: #E6E0DB;
+  border: none;
+  padding: 10px 50px 20px 50px;
+}
   .containersize{
     width: 96%;
     margin: 0 2%;
