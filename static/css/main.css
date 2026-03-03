@@ -310,19 +310,25 @@ font-size: 16px;
 line-height: 1.6;
 }
 
-/* Resume page only: widen the content area without affecting other pages */
+/* ===== Resume page only overrides (keep as the LAST rules in the file) ===== */
+
+#resume{
+  width: 100%;
+}
+
 #resume .containersize{
-  width: min(1100px, 92%);
+  width: 100%;
+  max-width: 1300px;
   margin: 0 auto;
+  text-align: center;
 }
 
-/* Resume page only: use padding instead of thick borders for better usable width */
 #resume .test{
+  background-color: #E6E0DB;
   border: none;
-  padding: 10px 50px 20px 50px;
+  padding: 20px 30px;
 }
 
-/* Resume page only: center the PDF */
 #resume .pdf-center{
   display: flex;
   justify-content: center;
@@ -330,12 +336,11 @@ line-height: 1.6;
   overflow-x: auto;
 }
 
-/* Resume page only: PDF container size */
 #resume .resume_pdf{
   width: 100%;
-  max-width: 1100px;
+  max-width: 1300px;
   height: 85vh;
-  max-height: 1100px;
+  max-height: 1200px;
   margin: 0;
   background-color: #e6e0db;
   flex: 0 0 auto;
