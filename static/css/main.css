@@ -319,7 +319,7 @@ line-height: 1.6;
 
 .resume_pdf{
   width: 100%;
-  max-width: 850px;   /* A4-ish */
+  max-width: 1200px;   /* A4-ish */
   height: 85vh;
   max-height: 1100px;
   background-color: #e6e0db;
