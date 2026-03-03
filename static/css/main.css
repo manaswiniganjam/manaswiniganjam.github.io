@@ -310,32 +310,39 @@ font-size: 16px;
 line-height: 1.6;
 }
 
-.pdf-center{
+/* Resume page only: widen the content area without affecting other pages */
+#resume .containersize{
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* Resume page only: use padding instead of thick borders for better usable width */
+#resume .test{
+  border: none;
+  padding: 10px 50px 20px 50px;
+}
+
+/* Resume page only: center the PDF */
+#resume .pdf-center{
   display: flex;
   justify-content: center;
   width: 100%;
   overflow-x: auto;
 }
 
-.resume_pdf{
+/* Resume page only: PDF container size */
+#resume .resume_pdf{
   width: 100%;
   max-width: 1100px;
   height: 85vh;
   max-height: 1100px;
-  background-color: #e6e0db;
   margin: 0;
-  flex: 0 0 auto;     /* prevents flex from shrinking it oddly */
+  background-color: #e6e0db;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 900px){
-  .test{
-  background-color: #E6E0DB;
-  border: none;
-  padding: 10px 50px 20px 50px;
-}
-  .containersize{
-  width: min(1100px, 92%);
-  margin: 0 auto;
-  text-align: center;
-}
+  #resume .test{
+    padding: 10px 15px 20px 15px;
+  }
 }
