@@ -314,14 +314,17 @@ line-height: 1.6;
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: auto;      /* if viewport < PDF width */
+  overflow-x: auto;
 }
 
 .resume_pdf{
-  width: min(850px, 100%);
-  height: min(1100px, 85vh);
-  margin: 0;
+  width: 100%;
+  max-width: 850px;   /* A4-ish */
+  height: 85vh;
+  max-height: 1100px;
   background-color: #e6e0db;
+  margin: 0;
+  flex: 0 0 auto;     /* prevents flex from shrinking it oddly */
 }
 
 @media (max-width: 900px){
