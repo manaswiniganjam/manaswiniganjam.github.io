@@ -310,8 +310,27 @@ font-size: 16px;
 line-height: 1.6;
 }
 
-.resume_pdf {
-background-color: #e6e0db;
-	position: relative;
-	margin: 0px 0px 0px 5px;
+.pdf-center{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;      /* if viewport < PDF width */
+}
+
+.resume_pdf{
+  width: min(850px, 100%);
+  height: min(1100px, 85vh);
+  margin: 0;
+  background-color: #e6e0db;
+}
+
+@media (max-width: 900px){
+  .test{
+    border-left-width: 15px;
+    border-right-width: 15px;
+  }
+  .containersize{
+    width: 96%;
+    margin: 0 2%;
+  }
 }
