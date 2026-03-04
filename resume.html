@@ -45,41 +45,47 @@ title: resume
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-(function () {
+(async function () {
   const url = "{{ site.baseurl }}pdf/mg_resume_1.pdf";
-  const container = document.getElementById("pdf-container");
 
   const pdfjsLib = window["pdfjs-dist/build/pdf"];
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
+  const container = document.getElementById("pdf-container");
+  const wrapper = document.querySelector("#resume .pdf-wrapper");
+
+  // tweak this to change "zoom" feeling (smaller number = smaller text)
+  const SCALE_TWEAK = 0.95;
+
   let pdfDoc = null;
 
-  // ↓ Make text look slightly smaller by reducing this number (try 0.90–0.98)
-  const SCALE_TWEAK = 0.90;
-
-  async function renderAllPages() {
+  async function render() {
     if (!pdfDoc) return;
+
     container.innerHTML = "";
 
-    const containerWidth = container.clientWidth;
+    // Column width (NOT full window width)
+    const targetCssWidth = wrapper.clientWidth - 36; // subtract container padding
+
+    const dpr = window.devicePixelRatio || 1;
 
     for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
       const page = await pdfDoc.getPage(pageNum);
 
-      // Fit-to-width scale
-      const unscaled = page.getViewport({ scale: 1 });
-      const scale = (containerWidth / unscaled.width) * SCALE_TWEAK;
+      // Fit page to the column width
+      const viewport1 = page.getViewport({ scale: 1 });
+      const scale = (targetCssWidth / viewport1.width) * SCALE_TWEAK;
       const viewport = page.getViewport({ scale });
-
-      // Retina sharpness
-      const dpr = window.devicePixelRatio || 1;
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
-      canvas.style.width = viewport.width + "px";
-      canvas.style.height = viewport.height + "px";
+      // CSS size
+      canvas.style.width = Math.floor(viewport.width) + "px";
+      canvas.style.height = Math.floor(viewport.height) + "px";
+
+      // Actual pixel buffer for sharpness
       canvas.width = Math.floor(viewport.width * dpr);
       canvas.height = Math.floor(viewport.height * dpr);
 
@@ -91,16 +97,14 @@ title: resume
     }
   }
 
-  pdfjsLib.getDocument(url).promise.then(async function (pdf) {
-    pdfDoc = pdf;
-    await renderAllPages();
-  });
+  pdfDoc = await pdfjsLib.getDocument(url).promise;
+  await render();
 
-  // Re-render on resize so it stays consistent across screen sizes
-  let t = null;
-  window.addEventListener("resize", function () {
+  // Re-render on resize (debounced)
+  let t;
+  window.addEventListener("resize", () => {
     clearTimeout(t);
-    t = setTimeout(() => renderAllPages(), 200);
+    t = setTimeout(render, 200);
   });
 })();
 </script>
