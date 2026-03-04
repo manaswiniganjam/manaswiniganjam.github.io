@@ -67,8 +67,11 @@ async function render() {
 
   const dpr = window.devicePixelRatio || 1;
 
-  // TRUE fixed reading scale (try between 1.0 and 1.2)
-  const BASE_SCALE = 1.0;
+  // Pick a comfortable scale; smaller = smaller text
+  const BASE_SCALE = 0.95;
+
+  // Extra oversampling for sharpness (2 is a good ceiling)
+  const OVERSAMPLE = 2;
 
   for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
     const page = await pdfDoc.getPage(pageNum);
@@ -76,21 +79,27 @@ async function render() {
     const viewport = page.getViewport({ scale: BASE_SCALE });
 
     const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
 
-    // CSS display size
-    canvas.style.width = viewport.width + "px";
-    canvas.style.height = viewport.height + "px";
+    // CSS size (display)
+    canvas.style.width = Math.round(viewport.width) + "px";
+    canvas.style.height = Math.round(viewport.height) + "px";
 
-    // Actual pixel buffer (retina sharpness)
-    canvas.width = Math.floor(viewport.width * dpr);
-    canvas.height = Math.floor(viewport.height * dpr);
+    // Real pixel buffer (render)
+    const renderScale = dpr * OVERSAMPLE;
+    canvas.width = Math.round(viewport.width * renderScale);
+    canvas.height = Math.round(viewport.height * renderScale);
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Map render pixels back to CSS pixels
+    ctx.setTransform(renderScale, 0, 0, renderScale, 0, 0);
 
     container.appendChild(canvas);
 
-    await page.render({ canvasContext: ctx, viewport }).promise;
+    await page.render({
+      canvasContext: ctx,
+      viewport,
+      intent: "display"
+    }).promise;
   }
 }
 
