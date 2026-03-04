@@ -310,26 +310,30 @@ font-size: 16px;
 line-height: 1.6;
 }
 
-/* ===== Resume page only (PDF.js) ===== */
-
+/* Resume page only: PDF.js column */
 #resume .pdf-wrapper{
-  max-width: 1100px;     /* desktop width: increase if you want bigger */
+  width: 100%;
+  max-width: 980px;     /* controls how "big" the PDF feels on desktop */
   margin: 0 auto;
 }
 
+/* The scroll area is the normal page scroll, not a sideways pan */
 #resume #pdf-container{
-  background-color: #E6E0DB;
-  padding: 18px;
+  width: 100%;
   display: flex;
-  flex-direction: column;  /* stack pages */
-  gap: 18px;               /* space between pages */
+  flex-direction: column;  /* stack pages vertically */
   align-items: center;
+  gap: 20px;
+  padding: 18px;
+  background: #E6E0DB;
+  overflow-x: hidden;      /* IMPORTANT: prevents horizontal scroll */
 }
 
+/* Each canvas behaves like a page */
 #resume #pdf-container canvas{
+  width: 100% !important;  /* IMPORTANT: force it to column width */
+  height: auto !important;
   display: block;
-  max-width: 100%;
-  height: auto;
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
