@@ -31,19 +31,91 @@ title: resume
         <div class="test-body">
           <div class="resume">
 
-            <div class="frame"></div>
-            <div class="pdf-wrapper">
-              <div class="pdf-actions">
-                <a href="https://manaswiniganjam.github.io/pdf/mg_resume_1.pdf" target="_blank" rel="noopener">
-                  Open PDF in a new tab
-                </a>
-              </div>
-              <iframe
-                src="https://manaswiniganjam.github.io/pdf/mg_resume_1.pdf#view=FitV"
-                title="Manaswini Ganjam - Resume"
-                loading="lazy"
-                class="resume-iframe">
-                </iframe>
+<div class="pdf-wrapper">
+
+  <div class="pdf-actions">
+    <a href="{{ site.baseurl }}pdf/mg_resume_1.pdf" target="_blank" rel="noopener">
+      Open PDF in a new tab
+    </a>
+  </div>
+
+  <div id="pdf-container"></div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  (function () {
+    const url = "{{ site.baseurl }}pdf/mg_resume_1.pdf";
+    const container = document.getElementById("pdf-container");
+
+    const pdfjsLib = window["pdfjs-dist/build/pdf"];
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+    let pdfDoc = null;
+    let renderTask = null;
+
+    function clearContainer() {
+      container.innerHTML = "";
+    }
+
+    function renderPage1() {
+      if (!pdfDoc) return;
+
+      // cancel in-flight render if user resizes quickly
+      if (renderTask) {
+        try { renderTask.cancel(); } catch (e) {}
+        renderTask = null;
+      }
+
+      pdfDoc.getPage(1).then(function (page) {
+        clearContainer();
+
+        const wrapperWidth = container.clientWidth;
+        const unscaledViewport = page.getViewport({ scale: 1 });
+
+        // Fit-to-width scale
+        const scale = wrapperWidth / unscaledViewport.width;
+
+        // Retina crispness
+        const dpr = window.devicePixelRatio || 1;
+        const viewport = page.getViewport({ scale: scale });
+
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.style.width = viewport.width + "px";
+        canvas.style.height = viewport.height + "px";
+
+        canvas.width = Math.floor(viewport.width * dpr);
+        canvas.height = Math.floor(viewport.height * dpr);
+
+        context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        container.appendChild(canvas);
+
+        renderTask = page.render({
+          canvasContext: context,
+          viewport: viewport
+        });
+      });
+    }
+
+    // Load PDF once
+    pdfjsLib.getDocument(url).promise.then(function (pdf) {
+      pdfDoc = pdf;
+      renderPage1();
+    });
+
+    // Re-render on resize (debounced)
+    let resizeTimer = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPage1, 150);
+    });
+  })();
+</script>
               </div>
             </div>
         </div>
