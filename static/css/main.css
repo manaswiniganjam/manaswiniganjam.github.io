@@ -312,9 +312,7 @@ line-height: 1.6;
 
 /* ===== Resume page only overrides (keep as the LAST rules in the file) ===== */
 
-#resume{
-  width: 100%;
-}
+#resume{ width: 100%; }
 
 #resume .containersize{
   width: 100%;
@@ -329,25 +327,35 @@ line-height: 1.6;
   padding: 20px 30px;
 }
 
-#resume .pdf-center{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  overflow-x: auto;
-}
-
-#resume .resume_pdf{
+/* Resume PDF embed */
+#resume .pdf-wrapper{
   width: 100%;
   max-width: 1300px;
+  margin: 0 auto;
+}
+
+#resume .pdf-actions{
+  text-align: right;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#resume .pdf-wrapper iframe{
+  width: 100%;
   height: 85vh;
+  min-height: 900px;
   max-height: 1200px;
-  margin: 0;
-  background-color: #e6e0db;
-  flex: 0 0 auto;
+  display: block;
 }
 
 @media (max-width: 900px){
   #resume .test{
     padding: 10px 15px 20px 15px;
+  }
+  #resume .pdf-actions{
+    text-align: center;
+  }
+  #resume .pdf-wrapper iframe{
+    min-height: 700px;
   }
 }
