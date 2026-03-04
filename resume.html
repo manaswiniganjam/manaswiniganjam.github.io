@@ -66,7 +66,7 @@ title: resume
     container.innerHTML = "";
 
     // Column width (NOT full window width)
-    const targetCssWidth = wrapper.clientWidth - 36; // subtract container padding
+    const targetCssWidth = Math.min(wrapper.clientWidth - 36, 860); // cap width (try 820–900) // subtract container padding
 
     const dpr = window.devicePixelRatio || 1;
 
