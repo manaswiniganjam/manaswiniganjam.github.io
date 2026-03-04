@@ -325,8 +325,9 @@ line-height: 1.6;
 
 #resume .resume-iframe{
   display: block;
-  width: 100%;
-  max-width: 950px;            /* key: reduces the “too zoomed” feeling on desktop */
+  max-width: 850px;
+  height: 95vh;
+  min-height: 1100px;            /* key: reduces the “too zoomed” feeling on desktop */
   margin: 0 auto;              /* centers the actual PDF viewport */
   border: none;
 
