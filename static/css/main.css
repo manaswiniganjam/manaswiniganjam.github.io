@@ -321,11 +321,11 @@ line-height: 1.6;
   background-color: #E6E0DB;
   padding: 18px;
   display: flex;
-  justify-content: center;
-  overflow-x: auto;
+  flex-direction: column;  /* stack pages */
+  gap: 18px;               /* space between pages */
+  align-items: center;
 }
 
-/* canvas will be sized by JS to fit width, so CSS just keeps it responsive */
 #resume #pdf-container canvas{
   display: block;
   max-width: 100%;
