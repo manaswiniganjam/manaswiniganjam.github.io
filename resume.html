@@ -3,61 +3,57 @@ layout: layout
 title: resume
 ---
 <!-- Google Analytics -->
-    {% include analytics.html %}
- 
-  <div id="wrap">
- 
- <section id="about">
+{% include analytics.html %}
 
-	<div class="container">
-	  <div class="avatar">
-	   <a href="{{ site.baseurl}}/home.html"> 
-	   <img class="img-circle" src="{{ site.baseurl }}static/img/{{ site.avatar }}" alt="Responsive image" width="130" height="130">
-	  </a>
-	  </div>
-	  <h1><a href="{{ site.baseurl}}/home.html"> <strong> {{ site.author }} <strong></a></h1>
-	  <div class="tagline">
-	  <h4>{{site.tagline}}</h4>
-	</div>
-</div>
-</section>  
-{% include header.html %}
+<div id="wrap">
 
-<section id="resume">
-<div class="containersize">
-  <div class="test test-default">
-    <div class="test-body">
-<div class="resume">
-	<div class="frame">
-	 </div>
-    <div class="pdf-center">
-  <div id="adobe-dc-view" class="resume_pdf"></div>
+  <section id="about">
+    <div class="container">
+      <div class="avatar">
+        <a href="{{ site.baseurl}}/home.html">
+          <img class="img-circle" src="{{ site.baseurl }}static/img/{{ site.avatar }}" alt="Responsive image" width="130" height="130">
+        </a>
+      </div>
+
+      <h1><a href="{{ site.baseurl}}/home.html"><strong>{{ site.author }}</strong></a></h1>
+
+      <div class="tagline">
+        <h4>{{site.tagline}}</h4>
+      </div>
+    </div>
+  </section>
+
+  {% include header.html %}
+
+  <section id="resume">
+    <div class="containersize">
+      <div class="test test-default">
+        <div class="test-body">
+          <div class="resume">
+
+            <div class="frame"></div>
+
+            <div class="pdf-wrapper">
+              <div class="pdf-actions">
+                <a href="https://manaswiniganjam.github.io/pdf/mg_resume_1.pdf" target="_blank" rel="noopener">
+                  Open PDF in a new tab
+                </a>
+              </div>
+
+              <iframe
+                src="https://manaswiniganjam.github.io/pdf/mg_resume_1.pdf#view=FitH"
+                title="Manaswini Ganjam - Resume"
+                loading="lazy"
+                style="width:100%; border:none;">
+              </iframe>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include social.html %}
+
 </div>
-<script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
- <script type="text/javascript">
-// Store the UI options in a constant
-const previewConfig = {
-   embedMode: "SIZED_CONTAINER",
-   showDownloadPDF: false,
-   showZoomControl: true,
-   defaultViewMode: "FIT_WIDTH"
-}
-    document.addEventListener("adobe_dc_view_sdk.ready", function()
-    {
-        var adobeDCView = new AdobeDC.View({clientId: "3a43f33960bd4e98806fd3f922d59b42", divId: "adobe-dc-view", backgroundColor: "#E6E0DB"});
-        adobeDCView.previewFile(
-       {
-          content:   {location: {url: "https://manaswiniganjam.github.io/pdf/mg_resume_1.pdf"}},
-          metaData: {fileName: "mg_resume_1.pdf"}
-       }, previewConfig);
-    });
- </script>	
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</section>
-	  {% include social.html %}
-	 </div>
-  
