@@ -331,8 +331,6 @@ line-height: 1.6;
 
 /* Each canvas behaves like a page */
 #resume #pdf-container canvas{
-  width: 100% !important;  /* IMPORTANT: force it to column width */
-  height: auto !important;
   display: block;
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
