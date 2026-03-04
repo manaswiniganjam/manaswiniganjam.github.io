@@ -60,42 +60,39 @@ title: resume
 
   let pdfDoc = null;
 
-  async function render() {
-    if (!pdfDoc) return;
+async function render() {
+  if (!pdfDoc) return;
 
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    // Column width (NOT full window width)
-    const targetCssWidth = Math.min(wrapper.clientWidth - 36, 800); // cap width (try 820–900) // subtract container padding
+  const dpr = window.devicePixelRatio || 1;
 
-    const dpr = window.devicePixelRatio || 1;
+  // TRUE fixed reading scale (try between 1.0 and 1.2)
+  const BASE_SCALE = 1.1;
 
-    for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-      const page = await pdfDoc.getPage(pageNum);
+  for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+    const page = await pdfDoc.getPage(pageNum);
 
-      // Fit page to the column width
-      const viewport1 = page.getViewport({ scale: 1 });
-      const scale = (targetCssWidth / viewport1.width) * SCALE_TWEAK;
-      const viewport = page.getViewport({ scale });
+    const viewport = page.getViewport({ scale: BASE_SCALE });
 
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
-      // CSS size
-      canvas.style.width = Math.floor(viewport.width) + "px";
-      canvas.style.height = Math.floor(viewport.height) + "px";
+    // CSS display size
+    canvas.style.width = viewport.width + "px";
+    canvas.style.height = viewport.height + "px";
 
-      // Actual pixel buffer for sharpness
-      canvas.width = Math.floor(viewport.width * dpr);
-      canvas.height = Math.floor(viewport.height * dpr);
+    // Actual pixel buffer (retina sharpness)
+    canvas.width = Math.floor(viewport.width * dpr);
+    canvas.height = Math.floor(viewport.height * dpr);
 
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      container.appendChild(canvas);
+    container.appendChild(canvas);
 
-      await page.render({ canvasContext: ctx, viewport }).promise;
-    }
+    await page.render({ canvasContext: ctx, viewport }).promise;
   }
+}
 
   pdfDoc = await pdfjsLib.getDocument(url).promise;
   await render();
