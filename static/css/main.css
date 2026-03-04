@@ -310,36 +310,32 @@ font-size: 16px;
 line-height: 1.6;
 }
 
-/* ===== Resume page only ===== */
+/* ===== Resume page only (PDF.js) ===== */
+
 #resume .pdf-wrapper{
-  width: 100%;
+  max-width: 1100px;     /* desktop width: increase if you want bigger */
   margin: 0 auto;
-  max-width: 1100px;           /* page area width */
+}
+
+#resume #pdf-container{
+  background-color: #E6E0DB;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+/* canvas will be sized by JS to fit width, so CSS just keeps it responsive */
+#resume #pdf-container canvas{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 #resume .pdf-actions{
-  text-align: center;          /* looks cleaner than right-align here */
-  margin: 0 0 10px 0;
+  text-align: center;
+  margin-bottom: 12px;
   font-size: 14px;
-}
-
-#resume .resume-iframe{
-  display: block;
-  max-width: 850px;
-  height: 95vh;
-  min-height: 1100px;            /* key: reduces the “too zoomed” feeling on desktop */
-  margin: 0 auto;              /* centers the actual PDF viewport */
-  border: none;
-
-  /* key: show at least ~one full page */
-  height: 92vh;                /* tall */
-  min-height: 1100px;          /* ensures full-page feel on desktop */
-  max-height: 1400px;          /* prevents ridiculous tall frames */
-}
-@media (max-width: 900px){
-  #resume .resume-iframe{
-    max-width: 100%;
-    height: 88vh;
-    min-height: 900px;
-  }
 }
