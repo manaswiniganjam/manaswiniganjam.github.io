@@ -68,7 +68,7 @@ async function render() {
   const dpr = window.devicePixelRatio || 1;
 
   // TRUE fixed reading scale (try between 1.0 and 1.2)
-  const BASE_SCALE = 1.1;
+  const BASE_SCALE = 1.0;
 
   for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
     const page = await pdfDoc.getPage(pageNum);
